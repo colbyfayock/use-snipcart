@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import { useSnipcart } from '../../use-snipcart';
 
 import { toCamel } from '../lib/util';
@@ -14,14 +16,16 @@ export default function Index() {
 
   const repositoryUrlDisplay = repositoryExists && repositoryUrl.split('://')[1];
 
-  const hookSettings = {
-    message: 'Hello, custom hook!'
-  }
-
-  const { message } = useSnipcart(hookSettings);
+  const { cart = {} } = useSnipcart();
+  const { subtotal = '0.00' } = cart;
 
   return (
     <main>
+      <Head>
+        <link rel="preconnect" href="https://app.snipcart.com" />
+        <link rel="preconnect" href="https://cdn.snipcart.com" />
+        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.css" />
+      </Head>
       <style jsx global>{`
         body {
           font-family: sans-serif;
@@ -90,24 +94,62 @@ export default function Index() {
 
         <h2>Examples</h2>
 
-        <h3>Set and grab message</h3>
+
+        <ul>
+          <li>
+            <h3>My Cool Product</h3>
+            <p>
+              $99.99
+            </p>
+            <p>
+              <button
+                className="snipcart-add-item"
+                data-item-id="my_cool_product"
+                data-item-name="My Cool Product"
+                data-item-url="/products/my-cool-product"
+                data-item-price="99.99">
+                  Add to Cart
+              </button>
+            </p>
+          </li>
+          <li>
+            <h3>My Other Product</h3>
+            <p>
+              $49.99
+            </p>
+            <p>
+              <button
+                className="snipcart-add-item"
+                data-item-id="my_other_product"
+                data-item-name="My Other Product"
+                data-item-url="/products/my-other-product"
+                data-item-price="49.99">
+                  Add to Cart
+              </button>
+            </p>
+          </li>
+        </ul>
+
+        <p>
+          <button className="snipcart-checkout snipcart-summary">
+            <strong className="sr-only">Cart</strong>
+          </button>
+        </p>
+
         <p>
           <strong>Input:</strong>
         </p>
         <pre>
           <code>
-{`const hookSettings = {
-  message: 'Hello, custom hook!'
-}
-
-const { message } = useSnipcart(hookSettings);`}
+{`const { cart = {} } = useSnipcart();
+const { subtotal = '0.00' } = cart;`}
           </code>
         </pre>
         <p>
           <strong>Output:</strong>
         </p>
         <p>
-          { message }
+          Subtotal: ${ subtotal }
         </p>
       </section>
 
@@ -116,6 +158,9 @@ const { message } = useSnipcart(hookSettings);`}
           Made by <a href={authorUrl}>{ authorName }</a>
         </p>
       </footer>
+
+      <script async src="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js" />
+      <div hidden id="snipcart" data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY} data-config-modal-style="side" />
     </main>
   );
 
