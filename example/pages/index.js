@@ -24,7 +24,7 @@ export default function Index() {
       <Head>
         <link rel="preconnect" href="https://app.snipcart.com" />
         <link rel="preconnect" href="https://cdn.snipcart.com" />
-        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.css" />
+        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
       </Head>
       <style jsx global>{`
         body {
@@ -159,7 +159,7 @@ const { subtotal = '0.00' } = cart;`}
         </p>
       </footer>
 
-      <script async src="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js" />
+      <script async src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" />
       <div hidden id="snipcart" data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY} data-config-modal-style="side" />
     </main>
   );
