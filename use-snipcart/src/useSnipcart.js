@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect, useRef } from 'react';
+import { useState, createContext, useContext, useEffect } from 'react';
 
 export const SnipcartContext = createContext();
 
@@ -12,7 +12,6 @@ export const SnipcartProvider = ({ children }) => {
 }
 
 export function useSnipcartState() {
-  const subscriptionRef = useRef();
   const [state, setState] = useState({});
 
   useEffect(() => {
