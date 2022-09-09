@@ -14,9 +14,8 @@
     "watch:example": "yarn workspace example develop",
     "watch:hook": "yarn workspace use-snipcart watch"
   },
-  "devDependencies": {},
-  "license": "MIT",
-  "dependencies": {
-    "concurrently": "^7.0.0"
-  }
+  "devDependencies": {
+    "concurrently": "^7.4.0"
+  },
+  "license": "MIT"
 }
